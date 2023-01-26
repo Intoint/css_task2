@@ -1,11 +1,11 @@
 <script>
-import Userfront from "@userfront/vue"
-export default {
-  name: "allEvents",
-  created() {
-    document.body.style.backgroundColor = "#20B2AA";
-  },
-  computed: {
+  import Userfront from "@userfront/vue"
+  export default {
+    name: "allEvents",
+    created() {
+      document.body.style.backgroundColor = "#20B2AA";
+    },
+    computed: {
       user() {
         return Userfront.user;
       },
@@ -13,38 +13,37 @@ export default {
         return Userfront.user.image;
       },
     },
-};
+  };
 </script>
 
 <template>
-<div>
-  <span class="logo"><span>StarEvents</span></span>
-  <div class="mainInputClass">
-    <div class="nameProfile">
-      <img :src="userImgSrc" alt="profilepic" class="profilePic"/>
-      <span class="greatToseeYoutext"> <span>Great to see you!</span>
-      <span class="johnSmithText">
+  <div>
+    <span class="logo"><span>StarEvents</span></span>
+    <div class="mainInputClass">
+      <div class="nameProfile">
+        <img :src="userImgSrc" alt="profilepic" class="profilePic"/>
+        <span class="greatToseeYoutext"> <span>Great to see you!</span>
+        <span class="userName">
           <span>{{ user.name }}</span></span>
-      </span>
+        </span>
+      </div>
+      <div>
+        <span class="discoverText"> 
+          <span>Discover Events in your neigborhood</span>
+        </span>
+        <input type ="text" placeholder ="Search events..." class="searchBoxText">
+      </div>
+      <div class="events">
+        <a href="/allEvents" class="button">
+        <span class="allEventsText"><span>All events</span></span></a>
+      </div>    
     </div>
-    <div>
-      <span class="discoverText"> 
-        <span>Discover Events in your neigborhood</span>
-      </span>
-      <input type ="text" placeholder ="Search events..." class="searchBoxText">
-    </div>
-    <div class="events">
-      <span class="allEventsText"><span>All events</span></span>
-      <a href="/createevent" class="button">
-      <span class="newEventText"><span>Create new event</span></span></a>
-      <span class="viewEventsTexts"><span>View my events</span></span>
-    </div>    
-  </div>
-</div> 
+  </div> 
 </template>
 
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '@/scss/shared-styles.scss';
 
 .mainInputClass {
   margin-top: 70px;
@@ -57,7 +56,7 @@ export default {
   margin-right: auto;
   }
   
-.mainInputClass > input{
+ mainInputClass > input{
   color: rgba(151, 151, 151, 1);
   display: flex;
   flex-shrink: 0;
@@ -152,7 +151,7 @@ export default {
   
 }
 
-.johnSmithText {
+.userName {
   color: rgba(255, 255, 255, 1);
   height: auto;
   flex-grow: 1;

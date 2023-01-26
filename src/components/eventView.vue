@@ -1,30 +1,32 @@
 <script>
-export default {
-  props: ['name','date','description','image','location']
+  export default {
+    props: ['name','date','description','image','location']
 }
 </script>
 
 <template>
-    <div class="eventContainer">
-    <img :src="$props.image"/>
-    <div class="divEventInfo">
-      <div style="display: flex; flex-direction: column">
-        <div class="eventName">{{name}}</div>
-        <div class="sideData">
-          <div>{{ date }}</div>
-          <div style="display: flex; flex-direction: row; align-items: center; gap: 10%">
-          </div>
+  <div class="eventContainer">
+  <img :src="$props.image"/>
+  <div class="divEventInfo">
+    <div style="display: flex; flex-direction: column">
+      <div class="eventName">{{name}}</div>
+      <div>{{description}}</div>
+      <div class="sideData">
+        <div>{{ date }}</div>
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 10%">
         </div>
       </div>
     </div>
+  </div>
  </div>
 </template>
 
 <style scoped>
   img {
-    max-height: 40%;
+    max-height: 10%;
     max-width: 15%;
     border-radius: 20px;
+    object-fit: scale-down;  
   }
   
   .eventName {
@@ -40,6 +42,7 @@ export default {
     flex-direction: row;
     background: #BEC0C7;
     min-height: 84px;
+    max-height: 130px;
     min-width: 300px;
     padding: 10px;
     border-radius: 25px;
@@ -48,7 +51,7 @@ export default {
   }
 
   .eventContainer:hover {
-  box-shadow: 0 0 30px rgba(29, 176, 179, 1);
+    box-shadow: 0 0 30px rgba(29, 176, 179, 1);
   }
 
 </style>

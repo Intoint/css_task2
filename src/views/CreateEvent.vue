@@ -9,7 +9,8 @@ export default {
         name: "",
         location: "",
         date: "",
-        description: ""
+        description: "",
+        image: ""
       }
   },
   methods: {
@@ -19,41 +20,57 @@ export default {
        name: this.name,
        location: this.location,
        date: this.date,
-       description: this.description
+       description: this.description,
+       image: this.image
      }
-     console.log('name '+this.name)
-     console.log('location '+this.location)
-     console.log('description '+this.description)
-     console.log('date '+this.date)
-     this.$emit('event-created', eventInfo)
-     this.name = ''
-     this.location = ''
-     this.date = ''
-     this.description = ''
+     if (this.name != "")
+     {
+      console.log('name '+this.name)
+      console.log('location '+this.location)
+      console.log('description '+this.description)
+      console.log('date '+this.date)
+      console.log('Image '+this.image)
+      this.$emit('event-created', eventInfo)
+      this.name = ''
+      this.location = ''
+      this.date = ''
+      this.description = ''
+      this.image = ''
+     }
+     else
+     {
+      alert("Name cannot be empty")
+     }
     }
-  }
+  },
+  watch: {
+    image: function () {
+      document.getElementById("showImage").src = this.image
+    }
+  },
 };
 </script>
 
 <template>
   <form @submit.prevent="onSubmit">
     <div  >
-        <div class="mainInputClass">
-            <span class="headline"><span>Create new event</span></span>
-            <span class="logo"><span>StarEvents</span></span>
-        <img
-            src="src/Images/GreyBox.jpeg"
-            alt="Rectangle13404068"
-            class="greyBox"
-        />
-        <span class="addPictureText"><span>Add picture..</span></span>
-            <input id ="name" type="text" placeholder="name" v-model="name"/>
-            <input id = "date" type="text" placeholder="date"  v-model="date"/>
-            <input id="location" type="text" placeholder="location" v-model="location"  />
-            <input id="description" type="text" placeholder="description" v-model="description"/>
-            <span class="button"><input class="button" type="submit" value="Create event" > </span>
-        </div>
-        
+      <div class="mainInputClass">
+        <span class="headline"><span>Create new event</span></span>
+        <span class="logo"><span>StarEvents</span></span>
+      <img
+        id="showImage"
+        src="images/GreyBox.jpeg"
+        alt="Rectangle13404068"
+        class="greyBox"
+      />
+      <span class="addPictureText"><span>Add picture..</span></span>
+        <input id ="name" type="text" placeholder="name" v-model="name"/>
+        <input id = "date" type="text" placeholder="date"  v-model="date"/>
+        <input id="location" type="text" placeholder="location" v-model="location"  />
+        <input id="description" type="text" placeholder="description" v-model="description"/>
+        <input id="image" type="text" placeholder="image" v-model="image"/>
+        <span class="button"><input class="button" type="submit" value="Create event" > </span>
+      </div>      
     </div>
   </form>
 </template>
@@ -132,7 +149,7 @@ export default {
   width: 277px;
   height: 149px;
   border-color: transparent;
-  
+  object-fit: scale-down;  
 }
 .addPictureText {
   top: 245px;

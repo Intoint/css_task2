@@ -2,7 +2,6 @@
 import eventView from '../components/eventView.vue'
 import createEvent from '../views/CreateEvent.vue'
 
-
 export default {
   name: 'allEvents',
   components: {
@@ -12,12 +11,22 @@ export default {
   created() {
   document.body.style.backgroundColor = "#20B2AA";
   },
+  mounted() {
+    if(localStorage.events) {
+      this.events = JSON.parse(localStorage.events);
+    }
+  },
+  watch: {
+    events: {
+      handler(allEvents) {
+        localStorage.events = JSON.stringify(allEvents);
+      },
+      deep: true
+    }
+  },
   data() {
     return {
       events: [
-            { name: 'green', date: '15-09-1963', image: 'src/Images/Skærmbillede 2022-12-04 kl. 12.34.33.png', location: 'Hjemme' , description: 'TEST' },
-            { name: 'blue', date: '15-09-1949', image: 'src/Images/Skærmbillede 2022-12-04 kl. 12.34.33.png', location: 'Ude' , description: 'TEST2' },
-            { name: 'red', date: '03-09-1963', image: 'src/Images/forstørrelsesGlas.png', location: 'Hjemme' , description: 'TEST3' },
           ]
     }
   }
@@ -30,6 +39,7 @@ export default {
       console.log('Date: '+eventInfo.date)
       console.log('Location: '+eventInfo.location)
       console.log('Description: '+eventInfo.description)
+      console.log('Image: '+eventInfo.image)
       let newEvent = {
         name: eventInfo.name,
         date: eventInfo.date,
@@ -38,6 +48,9 @@ export default {
         description: eventInfo.description
       }
       this.events.push(newEvent)
+    },
+    deleteEvent() {
+      this.events.splice(event.target.parentNode.id,1)
     }
   }
 };
@@ -45,21 +58,23 @@ export default {
 
 <template>
   <div class="eventContainer">
- <span class="logo"><span>StarEvents</span></span>
-    <ul>
-        <li v-for="(event, index) in events" :key="index">
-          <eventView :name="event.name" :date="event.date" :image="event.image" :location="event.location" :description="event.decription"></eventView>
-        </li>
-      </ul>
-      <createEvent @event-created="addEvent"></createEvent>
-    </div>
- 
+    <span class="logo"><span>StarEvents</span></span>
+    <table class="eventTable">
+      <tr v-for="(event, index) in events" :key="index" :id="index">
+        <eventView :name="event.name" :date="event.date" :image="event.image" :location="event.location" :description="event.decription"></eventView><button v-on:click="deleteEvent">Delete</button>
+      </tr>
+    </table>
+    <createEvent @event-created="addEvent"></createEvent>
+  </div>
 </template>
 
 <style scoped>
 
+  .eventTable {
+    width: 100%;
+  }
 
-  .sideData {
+  .sideData { 
     color: white;
     display: flex;
     flex-direction: row;
