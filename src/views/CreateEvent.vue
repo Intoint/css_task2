@@ -11,7 +11,8 @@ export default {
         date: "",
         description: "",
         image: ""
-      }
+  }
+
   },
   methods: {
     onSubmit() {

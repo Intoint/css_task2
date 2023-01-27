@@ -3,7 +3,6 @@
   export default {
     computed: {
       isLoggedIn() {
-        console.log("Token: "+Userfront.tokens.accessToken)
         return (!!Userfront.tokens.accessToken)
       },
     },

@@ -9,7 +9,6 @@ import Reset from "../views/Reset.vue"
 import SignUp from "../views/signup.vue"
 import Dashboard from "../views/Dashboard.vue"
 import Userfront from "@userfront/vue"
-import CreateEvent from '../views/CreateEvent.vue'
 import viewProfile from '../views/ViewProfile.vue'
 import allEvents from '../views/allEvents.vue'
 import HomeScreen from '../views/HomeScreen.vue'

@@ -1,24 +1,41 @@
 <script>
+  import eventDetail from '@/components/eventDetail.vue'
+  import OpenWindow from '@/components/OpenWindow.vue';
   export default {
+    name: "eventView",
+    components: {
+      eventDetail,
+      OpenWindow
+    },
+    data() {
+      return {
+        open: false
+      }
+    },
     props: ['name','date','description','image','location']
 }
 </script>
 
 <template>
   <div class="eventContainer">
-  <img :src="$props.image"/>
-  <div class="divEventInfo">
-    <div style="display: flex; flex-direction: column">
-      <div class="eventName">{{name}}</div>
-      <div>{{description}}</div>
-      <div class="sideData">
-        <div>{{ date }}</div>
-        <div style="display: flex; flex-direction: row; align-items: center; gap: 10%">
+    <img :src="$props.image"/>
+    <div class="divEventInfo">
+      <div style="display: flex; flex-direction: column">
+        <div>
+          <label for="details">Details</label>
+          <input type="checkbox" id="details" v-model="open"/>
+        </div>
+
+        <div class="sideData">
+          <div class="eventName">{{name}}</div>
+            <div>{{ date }}</div>
         </div>
       </div>
+      <OpenWindow v-model="open">
+        <eventDetail  :name="name" :date="date" :image="image" :location="location" :description="description"></eventDetail>
+      </OpenWindow>
     </div>
   </div>
- </div>
 </template>
 
 <style scoped>

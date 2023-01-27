@@ -26,13 +26,14 @@ export default {
   },
   data() {
     return {
-      events: [
-          ]
+      events: [],
+      isHidden: false
     }
   }
 ,
   methods: {
     addEvent(eventInfo) {
+      this.isHidden = !this.isHidden;
       console.log('MODTAGET')
       console.log('---------')
       console.log('Navn: '+eventInfo.name)
@@ -59,12 +60,20 @@ export default {
 <template>
   <div class="eventContainer">
     <span class="logo"><span>StarEvents</span></span>
-    <table class="eventTable">
+    <div id="topButton" style="border=solid">
+      <br/>
+      <br/>
+      <button v-if="!isHidden" id="createEventButton" v-on:click="isHidden = !isHidden">Create event</button>      
+    </div>
+    <div v-if="isHidden" id="createEvent">
+      
+      <createEvent @event-created="addEvent"></createEvent>
+    </div>
+    <table id="eventTable" class="eventTable">
       <tr v-for="(event, index) in events" :key="index" :id="index">
-        <eventView :name="event.name" :date="event.date" :image="event.image" :location="event.location" :description="event.decription"></eventView><button v-on:click="deleteEvent">Delete</button>
+        <eventView :name="event.name" :date="event.date" :image="event.image" :location="event.location" :description="event.description"></eventView><button v-on:click="deleteEvent">Delete</button>
       </tr>
     </table>
-    <createEvent @event-created="addEvent"></createEvent>
   </div>
 </template>
 
