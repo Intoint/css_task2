@@ -12,13 +12,15 @@
         open: false
       }
     },
-    props: ['name','date','description','image','location']
+    props: ['name','date','description','image','location','rating']
 }
 </script>
 
 <template>
   <div class="eventContainer">
-    <img :src="$props.image"/>
+
+    <img v-if="$props.image" :src="$props.image"/>
+    <img v-else src="images/ProfilePic.png"/>
     <div class="divEventInfo">
       <div style="display: flex; flex-direction: column">
         <div>
@@ -28,11 +30,12 @@
 
         <div class="sideData">
           <div class="eventName">{{name}}</div>
-            <div>{{ date }}</div>
+          <div>Rating: {{ rating }}</div>
+          <div>Date: {{ date }}</div>
         </div>
       </div>
       <OpenWindow v-model="open">
-        <eventDetail  :name="name" :date="date" :image="image" :location="location" :description="description"></eventDetail>
+        <eventDetail  :name="name" :date="date" :image="image" :location="location" :description="description" :rating="rating"></eventDetail>
       </OpenWindow>
     </div>
   </div>
@@ -40,6 +43,7 @@
 
 <style scoped>
   img {
+    width: 120px;
     max-height: 10%;
     max-width: 15%;
     border-radius: 20px;
@@ -50,7 +54,7 @@
     color: #CD853F;
     font-weight: 500;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .eventContainer {

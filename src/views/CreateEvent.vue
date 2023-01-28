@@ -10,6 +10,7 @@ export default {
         location: "",
         date: "",
         description: "",
+        rating: null,
         image: ""
   }
 
@@ -18,38 +19,47 @@ export default {
     onSubmit() {
       console.log('Submit')
       let eventInfo = {
-       name: this.name,
-       location: this.location,
-       date: this.date,
-       description: this.description,
-       image: this.image
-     }
-     if (this.name != "")
-     {
-      console.log('name '+this.name)
-      console.log('location '+this.location)
-      console.log('description '+this.description)
-      console.log('date '+this.date)
-      console.log('Image '+this.image)
-      this.$emit('event-created', eventInfo)
-      this.name = ''
-      this.location = ''
-      this.date = ''
-      this.description = ''
-      this.image = ''
-     }
-     else
-     {
-      alert("Name cannot be empty")
-     }
+        name: this.name,
+        location: this.location,
+        date: this.date,
+        description: this.description,
+        rating: this.rating,
+        image: this.image
+      }
+      if (this.name != "")
+      {
+        console.log('name '+this.name)
+        console.log('location '+this.location)
+        console.log('description '+this.description)
+        console.log('date '+this.date)
+        console.log('rating '+this.rating)
+        console.log('Image '+this.image)
+        this.$emit('event-created', eventInfo)
+        this.name = ''
+        this.location = ''
+        this.date = ''
+        this.description = ''
+        this.rating = null
+        this.image = ''
+      }
+      else
+      {
+        alert("Name cannot be empty")
+      }
+    },
+    cancel() {
+      console.log('CANCEL');
+      //this.$emit('close')
+      this.$emit('event-notcreated')
+      this.$el.submit()
     }
   },
   watch: {
     image: function () {
       document.getElementById("showImage").src = this.image
     }
-  },
-};
+  }
+}
 </script>
 
 <template>
@@ -69,8 +79,17 @@ export default {
         <input id = "date" type="text" placeholder="date"  v-model="date"/>
         <input id="location" type="text" placeholder="location" v-model="location"  />
         <input id="description" type="text" placeholder="description" v-model="description"/>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      <!--    <input id="rating" type="text" placeholder="rating" v-model="rating"/>-->
         <input id="image" type="text" placeholder="image" v-model="image"/>
-        <span class="button"><input class="button" type="submit" value="Create event" > </span>
+        <span class="buttons"><input class="button" type="submit" value="Create event"/> &nbsp; &nbsp;<input class="button" @click="cancel" value="Cancel"/> </span>
       </div>      
     </div>
   </form>
@@ -108,7 +127,7 @@ export default {
   background-color: rgba(249, 250, 251, 1);    
 }
 
-.button {
+.buttons {
   display: flex;
   flex-shrink: 0;
   border-radius: 14px;
@@ -119,6 +138,19 @@ export default {
   border-color: transparent;
   justify-content: center;
   background-color: rgba(29, 176, 179, 1);
+  cursor: pointer
+}
+.button {
+  display: flex;
+  flex-shrink: 0;
+  border-radius: 14px;
+  padding: 18px 10px;
+  width: 25vw;
+  height: 1vw;
+  align-items: center;
+  border-color: transparent;
+  justify-content: center;
+  background-color: rgba(9, 156, 159, 1);
   cursor: pointer
 }
 .buttonText {

@@ -1,7 +1,7 @@
 <script>
   export default {
     name: 'eventDetail',
-  props: ['name','date','description','image','location'],
+  props: ['name','date','description','image','location','rating'],
     mounted() {
       console.log('Mounted')
     }
@@ -18,6 +18,7 @@
               <tr>  <td>Date</td>           <td>{{ date }}</td>         </tr>
               <tr>  <td>Description</td>    <td>{{ description }}</td>  </tr>
               <tr>  <td>Location</td>       <td>{{ location }}</td>     </tr>
+              <tr>  <td>Rating</td>         <td>{{ rating }}</td>       </tr>
             </table>
         </div>
     </div>
