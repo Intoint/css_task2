@@ -80,16 +80,6 @@ export default {
         <input id = "date" type="date" placeholder="date" required min="2020-01-01" max="2040-12-31" v-model="date"/>
         <input id="location" type="text" placeholder="location" v-model="location"  />
         <input id="description" type="text" placeholder="description" v-model="description"/>
-        <!--  if use drop down
-        <label for="rating">Rating:</label>
-        <select id="rating" v-model.number="rating">
-          <option>5</option>
-          <option>4</option>
-          <option>3</option>
-          <option>2</option>
-          <option>1</option>
-        </select>
-        -->
         <input id="rating" type="number" min="1" max="5" placeholder="rating (1-5)" v-model="rating"/>
         <input id="image" type="text" placeholder="image (URL)" v-model="image"/>
         <span class="buttons"><input class="button" type="submit" value="Create event"/> &nbsp; &nbsp;<input class="button" @click="cancel" value="Cancel"/> </span>
