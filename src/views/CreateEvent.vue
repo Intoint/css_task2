@@ -5,17 +5,22 @@ export default {
   document.body.style.backgroundColor = "#20B2AA";
   },
   data() {
-      return {
-        name: "",
-        location: "",
-        date: "",
-        description: "",
-        rating: null,
-        image: ""
-  }
+    return {
+      name: "",
+      location: "",
+      date: null,
+      description: "",
+      rating: null,
+      image: ""
+    } 
 
   },
   methods: {
+    validateEvent: function()
+    {
+      console.log("VALIDATE")
+      return true;
+    },
     onSubmit() {
       console.log('Submit')
       let eventInfo = {
@@ -26,7 +31,7 @@ export default {
         rating: this.rating,
         image: this.image
       }
-      if (this.name != "")
+      if (this.validateEvent())
       {
         console.log('name '+this.name)
         console.log('location '+this.location)
@@ -37,14 +42,10 @@ export default {
         this.$emit('event-created', eventInfo)
         this.name = ''
         this.location = ''
-        this.date = ''
+        this.date = null
         this.description = ''
         this.rating = null
         this.image = ''
-      }
-      else
-      {
-        alert("Name cannot be empty")
       }
     },
     cancel() {
@@ -75,10 +76,11 @@ export default {
         class="greyBox"
       />
       <span class="addPictureText"><span>Add picture..</span></span>
-        <input id ="name" type="text" placeholder="name" v-model="name"/>
-        <input id = "date" type="text" placeholder="date"  v-model="date"/>
+        <input id ="name" type="text" placeholder="name" required v-model="name"/>
+        <input id = "date" type="date" placeholder="date" required min="2020-01-01" max="2040-12-31" v-model="date"/>
         <input id="location" type="text" placeholder="location" v-model="location"  />
         <input id="description" type="text" placeholder="description" v-model="description"/>
+        <!--  if use drop down
         <label for="rating">Rating:</label>
         <select id="rating" v-model.number="rating">
           <option>5</option>
@@ -87,8 +89,9 @@ export default {
           <option>2</option>
           <option>1</option>
         </select>
-      <!--    <input id="rating" type="text" placeholder="rating" v-model="rating"/>-->
-        <input id="image" type="text" placeholder="image" v-model="image"/>
+        -->
+        <input id="rating" type="number" min="1" max="5" placeholder="rating (1-5)" v-model="rating"/>
+        <input id="image" type="text" placeholder="image (URL)" v-model="image"/>
         <span class="buttons"><input class="button" type="submit" value="Create event"/> &nbsp; &nbsp;<input class="button" @click="cancel" value="Cancel"/> </span>
       </div>      
     </div>
