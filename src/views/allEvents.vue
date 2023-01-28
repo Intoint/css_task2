@@ -77,10 +77,11 @@ export default {
     <span class="logo"><span>StarEvents</span></span>
     <br/>
     <br/>
-    <div class="btn-group">      
-      <button v-if="!isHidden" id="createEventButton" v-on:click="isHidden = !isHidden">Create event</button>
+    <div v-if="!isHidden" class="btn-group">      
+      <button id="createEventButton" v-on:click="isHidden = !isHidden"><u>Create event</u></button>
       <button @click="sortList('name')">Name &#8597;</button>
-      <button @click="sortList('rating')">rating &#8597;</button>
+      <button @click="sortList('date')">Date &#8597;</button>
+      <button @click="sortList('rating')">Rating &#8597;</button>
     </div>
     <div v-if="isHidden" id="createEvent">
       
@@ -146,7 +147,7 @@ export default {
   background-color: #04AA6D; 
   border: 1px solid green; 
   color: white; 
-  padding: 10px 94px; 
+  padding: 10px 80px; 
   cursor: pointer; 
   float: left; 
 }
