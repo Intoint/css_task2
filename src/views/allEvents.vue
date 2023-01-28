@@ -32,9 +32,18 @@ export default {
       isHidden: false,
       sortedData: [],
       sortedbyASC: true,
+      search: ""
     }
-  }
-,
+  },
+  computed: {
+      filteredEvents() {
+        console.log("FE")
+        return this.events.filter(ev => {
+          return (ev.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1) 
+        });
+      },
+
+  },
   methods: {
     addEvent(eventInfo) {
       this.isHidden = !this.isHidden;
@@ -82,13 +91,14 @@ export default {
       <button @click="sortList('name')">Name &#8597;</button>
       <button @click="sortList('date')">Date &#8597;</button>
       <button @click="sortList('rating')">Rating &#8597;</button>
+      <input type="text" v-model="search" placeholder="Search name" />
     </div>
     <div v-if="isHidden" id="createEvent">
-      
       <createEvent @event-created="addEvent"></createEvent>
     </div>
+
     <table id="eventTable" class="eventTable">
-      <tr v-for="(event, index) in events" :key="index" :id="index">
+      <tr v-for="(event, index) in filteredEvents" :key="index" :id="index">
         <td style="display:none;">{{ event.name }}</td>
         <td style="display:none;">{{ event.date }}</td>
       <eventView :name="event.name" :date="event.date" :image="event.image" :location="event.location" :description="event.description" :rating="event.rating"></eventView><button v-on:click="deleteEvent">Delete</button>
@@ -147,7 +157,18 @@ export default {
   background-color: #04AA6D; 
   border: 1px solid green; 
   color: white; 
-  padding: 10px 80px; 
+  padding: 10px 60px; 
+  cursor: pointer; 
+  float: left; 
+}
+
+.btn-group input{
+  position:relative;
+  top: 0;
+  background-color: #04AA6D; 
+  border: 1px solid green; 
+  color: white; 
+  padding: 10px 50px; 
   cursor: pointer; 
   float: left; 
 }
